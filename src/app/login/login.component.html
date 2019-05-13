@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <div class="content">
+    <mat-card>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input matInput placeholder="Nazwa użytkownika" formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Hasło" type="password" formControlName="password">
+        </mat-form-field>
+
+        <mat-error *ngIf="error" class="error-validation">
+          Podałeś błędne hasło lub login.. :(
+        </mat-error>
+        
+        <button class="submit" mat-flat-button color="primary" [disabled]="isFormInvalid">Zaloguj się</button>
+      </form>
+    </mat-card>
+  </div>
+</div>
