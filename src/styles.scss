@@ -37,3 +37,21 @@ table {
 .mat-paginator-page-size-label {
     width: -webkit-fill-available;
 }
+
+.table-up-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+.d-flex-center {
+    display: flex;
+    justify-content: center;
+
+    mat-form-field {
+        margin-right: 20px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

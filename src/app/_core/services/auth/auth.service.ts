@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { startWith } from "rxjs/operators";
-import { Router } from '@angular/router';
-import { User } from '../../models/user';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable, Subject, Subscription } from "rxjs";
+import { Router } from "@angular/router";
+
+import { User } from "../../models/user";
 
 export interface AuthCredentials {
   username: string;
@@ -11,40 +11,38 @@ export interface AuthCredentials {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthService {
-
   private isAuthorizedSubject = new Subject();
   private _currentUser: User;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: AuthCredentials): Observable<any> {
-    return this.http.post('/token/', credentials);
+    return this.http.post("/token/", credentials);
   }
 
   storeToken(token: string) {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
   }
 
-  getToken() {
-    return localStorage.getItem('token') || null;
+  getToken(): string {
+    return localStorage.getItem("token") || null;
   }
 
-  getUserInfo() {
-    return this.http.get('/users/me/')
-      .subscribe(
-        (user: User) => {
-          this._currentUser = user;
-          this.isAuthorizedSubject.next(true);
-          this.router.navigate(['/ksiazki']);
-        },
-        () => this.isAuthorizedSubject.next(false),
-      )
+  getUserInfo(): Subscription {
+    return this.http.get("/users/me/").subscribe(
+      (user: User) => {
+        this._currentUser = user;
+        this.isAuthorizedSubject.next(true);
+        this.router.navigate(["/ksiazki"]);
+      },
+      () => this.isAuthorizedSubject.next(false)
+    );
   }
 
-  get currentUser() {
+  get currentUser(): User {
     return this._currentUser;
   }
 

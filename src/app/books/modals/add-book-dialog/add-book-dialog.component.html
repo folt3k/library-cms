@@ -1,0 +1,49 @@
+<h3 mat-dialog-title>Nowa książka</h3>
+
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="d-flex-center">
+      <mat-form-field>
+        <input matInput [placeholder]="'Tytul książki'" formControlName="title" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'Liczba stron'" formControlName="pages_count" />
+      </mat-form-field>
+    </div>
+    <div class="d-flex-center">
+      <mat-form-field>
+        <input matInput [placeholder]="'Rok wydania'" formControlName="publish_year" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Autor książki</mat-label>
+        <mat-select formControlName="author">
+          <mat-option *ngFor="let author of options.authors" [value]="author.id">{{ author.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="d-flex-center">
+      <mat-form-field>
+        <mat-label>Kategorie książki</mat-label>
+        <mat-select formControlName="book_categories" multiple>
+          <mat-option *ngFor="let cat of options.book_categories" [value]="cat.id">{{ cat.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Położenie książki</mat-label>
+        <mat-select formControlName="library_branch">
+          <mat-option *ngFor="let branch of options.library_branches" [value]="branch.id">{{ branch.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">
+        Zapisz książkę
+      </button>
+    </div>
+  </form>
+</div>

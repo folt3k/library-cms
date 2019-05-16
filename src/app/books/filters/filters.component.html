@@ -1,9 +1,6 @@
-<div>
-</div>
-
 <form [formGroup]="filtersForm" (ngSubmit)="onFiltersChange()">
   <div class="filters">
-      <app-search [parentFormGroup]="filtersForm" name="search" (onSearch)="onFiltersChange()"></app-search>
+    <app-search [parentFormGroup]="filtersForm" name="search" placeholder="Szukaj książki (tytuł/autor)"></app-search>
 
     <mat-form-field>
       <mat-label>Kategorie książek</mat-label>
@@ -20,10 +17,8 @@
     </mat-form-field>
   </div>
 
-
   <div class="buttons">
     <button mat-raised-button color="primary" [disabled]="!filtersForm.dirty" type="submit">Filtruj wyniki</button>
     <button mat-button *ngIf="filtersForm.dirty" type="button" (click)="resetForm()">Resetuj</button>
   </div>
-
 </form>

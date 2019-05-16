@@ -1,38 +1,21 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+
+import { DictsService } from "src/app/_core/services/dicts/dicts.service";
 
 @Component({
-  selector: 'app-filters',
-  templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.scss']
+  selector: "app-filters",
+  templateUrl: "./filters.component.html",
+  styleUrls: ["./filters.component.scss"]
 })
 export class FiltersComponent implements OnInit {
-
   filtersForm: FormGroup;
-  bookCatOptions = [
-    {
-      "id": 1,
-      "name": "Komedia"
-    },
-    {
-      "id": 2,
-      "name": "Horror"
-    },
-    {
-      "id": 3,
-      "name": "Powieść"
-    }
-  ];
-  branchOptions = [
-    {
-      "id": 1,
-      "name": "Filia nr 1 (Wrocławska 23/3)"
-    },
-  ]
+  bookCatOptions = this.dictsService.getDict("book_categories");
+  branchOptions = this.dictsService.getDict("library_branches");
 
   @Output() filtersChange = new EventEmitter();
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private dictsService: DictsService) {}
 
   ngOnInit() {
     this.initForm();
@@ -40,9 +23,9 @@ export class FiltersComponent implements OnInit {
 
   initForm() {
     this.filtersForm = this.fb.group({
-      search: [''],
+      search: [""],
       book_categories: [[]],
-      library_branch: [[]],
+      library_branch: [[]]
     });
   }
 
@@ -51,8 +34,7 @@ export class FiltersComponent implements OnInit {
   }
 
   resetForm() {
-    this.filtersForm.reset({ search: '', book_categories: [], library_branch: [] });
+    this.filtersForm.reset({ search: "", book_categories: [], library_branch: [] });
     this.onFiltersChange();
   }
-
 }

@@ -1,16 +1,9 @@
 <div class="wrapper" [formGroup]="parentFormGroup">
   <mat-form-field>
-    <input matInput placeholder="Znajdź książkę" [formControlName]="name">
+    <input matInput [placeholder]="placeholder" [formControlName]="name" />
     <button mat-button *ngIf="isValue" matSuffix mat-icon-button (click)="clearValue()">
       <mat-icon>close</mat-icon>
     </button>
     <mat-icon matSuffix>search</mat-icon>
-
   </mat-form-field>
-
-
-
-  <!-- <div class="search-btn"><button mat-raised-button color="primary" type="submit"
-      (click)="onClickSearch()">Szukaj</button></div> -->
-
 </div>

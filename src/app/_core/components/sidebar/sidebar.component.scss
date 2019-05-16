@@ -1,75 +1,75 @@
-$color-light: rgba(255,255,255,.5);
+$color-light: rgba(255, 255, 255, 0.5);
 $base-padding: 16px;
 
 .header {
-    padding: 0 $base-padding;
+  padding: 0 $base-padding;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    color: $color-light;
-    font-size: 1rem;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: $color-light;
+  font-size: 1rem;
 
-    img {
-        width: 30px;
-        height: 26px;
-        margin-right: 8px;
-    }
+  img {
+    width: 30px;
+    height: 26px;
+    margin-right: 8px;
+  }
 }
 
 .user {
-    margin-top: 24px;
-    padding: 16px 0 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: .8rem;
-    background-color: #1a1d25;
+  margin-top: 24px;
+  padding: 16px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  background-color: #1a1d25;
 }
 
 .username {
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .type {
-    color: $color-light;
-    margin-top: 10px;
+  color: $color-light;
+  margin-top: 10px;
 }
 
 .email {
-    color: rgba(255,255,255,.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .avatar {
-    margin-top: 20px;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    border: 5px solid #333846;
+  margin-top: 20px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 5px solid #333846;
 }
 
 .menu {
-    margin-top: 10px;
-    mat-list-item {
-        color: white;
-        font-size: .86rem;
-        height: 39px;
+  margin-top: 10px;
+  mat-list-item {
+    color: white;
+    font-size: 0.86rem;
+    height: 39px;
 
-        &:hover {
-            background-color: #20242d;
-            cursor: pointer;
-        }
-
-        mat-icon {
-            margin-right: 20px;
-            margin-top: 7px;
-            font-size: 16px;
-        }
-
-        ::ng-deep .mat-list-item-content {
-            margin-left: 6px;
-        }
+    &:hover {
+      background-color: #20242d;
+      cursor: pointer;
     }
+
+    mat-icon {
+      margin-right: 20px;
+      margin-top: 7px;
+      font-size: 16px;
+    }
+
+    ::ng-deep .mat-list-item-content {
+      margin-left: 6px;
+    }
+  }
 }

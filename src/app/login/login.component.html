@@ -1,17 +1,17 @@
 <div class="wrapper">
   <div class="content">
-      <div class="logo">
-          <img src="http://angular-material.fusetheme.com/assets/images/logos/fuse.svg" alt="">
-          <span>LibraryCMS</span>
-        </div>
+    <div class="logo">
+      <img src="http://angular-material.fusetheme.com/assets/images/logos/fuse.svg" alt="" />
+      <span>LibraryCMS</span>
+    </div>
     <mat-card>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
-          <input matInput placeholder="Nazwa użytkownika" formControlName="username">
+          <input matInput placeholder="Nazwa użytkownika" formControlName="username" />
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Hasło" type="password" formControlName="password">
+          <input matInput placeholder="Hasło" type="password" formControlName="password" />
         </mat-form-field>
 
         <mat-error *ngIf="error" class="error-validation">

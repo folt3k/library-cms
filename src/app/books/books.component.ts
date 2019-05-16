@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatDialog } from '@angular/material';
+
 import { BooksService } from '../_core/services/books/books.service';
+import { AddBookDialogComponent } from './modals/add-book-dialog/add-book-dialog.component';
 
 @Component({
     selector: 'app-books',
@@ -12,7 +15,7 @@ export class BooksComponent implements OnInit {
     displayedColumns = ['id', 'title', 'author', 'publish_year','library_branch','controls'];
     filterParams = {};
 
-    constructor(private booksService: BooksService) {
+    constructor(private booksService: BooksService, public modal: MatDialog) {
     }
 
     ngOnInit() {
@@ -47,4 +50,11 @@ export class BooksComponent implements OnInit {
         this.updateFilters(params);
         this.loadBooks()
     }
+
+    openAddBookDialog() {
+        this.modal.open(AddBookDialogComponent, {
+          width: '800px'
+        });
+    }
+
 }
