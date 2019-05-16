@@ -9,7 +9,7 @@ export class BooksService {
 
   constructor(private http: HttpClient) {}
 
-  queryBooks(): Promise<any> {
-    return this.http.get('/books/').toPromise();
+  queryBooks(params: any): Promise<any> {
+    return this.http.get('/books/', { params }).toPromise();
   }
 }

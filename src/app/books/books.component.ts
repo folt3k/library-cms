@@ -8,7 +8,9 @@ import { BooksService } from '../_core/services/books/books.service';
 })
 export class BooksComponent implements OnInit {
     books = [];
-    displayedColumns = ['id', 'title', 'author', 'publish_year', 'controls'];
+    pagination = {};
+    displayedColumns = ['id', 'title', 'author', 'publish_year','library_branch','controls'];
+    filterParams = {};
 
     constructor(private booksService: BooksService) {
     }
@@ -18,7 +20,31 @@ export class BooksComponent implements OnInit {
     }
 
     async loadBooks() {
-        const books = await this.booksService.queryBooks();
+        const books = await this.booksService.queryBooks(this.filterParams);
         this.books = books.results;
+        this.pagination = books.pagination;
+    }
+
+    onPageChange({ pageIndex, pageSize }) {
+        const params = {
+            page: pageIndex + 1,
+            page_size: pageSize,
+        }
+
+        this.updateFilters(params);
+        this.loadBooks();
+    }
+
+    updateFilters(values) {
+        this.filterParams = { ...this.filterParams, ...values };
+    }
+
+    onFiltersChange(data) {
+        const params = {
+            ...data,
+        }
+
+        this.updateFilters(params);
+        this.loadBooks()
     }
 }

@@ -1,0 +1,30 @@
+<header class="header">
+  <div class="logo">
+    <img src="http://angular-material.fusetheme.com/assets/images/logos/fuse.svg" alt="">
+    <span>LibraryCMS</span>
+  </div>
+</header>
+
+<div class="user">
+  <h3 class="username">{{ fullname }}</h3>
+  <span class="email">{{ user.email }}</span>
+  <img class="avatar" src="http://angular-material.fusetheme.com/assets/images/avatars/Velazquez.jpg" alt="avatar">
+  <span class="type">{{ getUserTypeText() }}</span>
+
+</div>
+
+<div class="menu">
+  <mat-list>
+    <mat-list-item>
+      <mat-icon>library_books</mat-icon>Książki
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon>account_balance
+      </mat-icon> Filie
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon>people
+      </mat-icon> Czytelnicy
+    </mat-list-item>
+  </mat-list>
+</div>

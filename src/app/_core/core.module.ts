@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenavModule, MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatListModule, MatIconModule, MatTableModule } from '@angular/material';
+import { MatSidenavModule, MatCardModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatListModule, MatIconModule, MatTableModule, MatProgressSpinnerModule, MatPaginatorModule, MatSelectModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UrlInterceptor } from './interceptors/url.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SearchComponent } from './components/forms/search/search.component';
 
+const COMPONENTS = [
+  SidebarComponent,
+  SearchComponent,
+]
 
 const MATERIALS = [
   MatSidenavModule,
@@ -16,10 +22,13 @@ const MATERIALS = [
   MatListModule,
   MatIconModule,
   MatTableModule,
+  MatProgressSpinnerModule,
+  MatPaginatorModule,
+  MatSelectModule,
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [...COMPONENTS],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -29,6 +38,7 @@ const MATERIALS = [
   ],
   exports: [
     ...MATERIALS,
+    ...COMPONENTS,
   ],
   providers: [
     {

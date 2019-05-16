@@ -1,5 +1,9 @@
 <div class="wrapper">
   <div class="content">
+      <div class="logo">
+          <img src="http://angular-material.fusetheme.com/assets/images/logos/fuse.svg" alt="">
+          <span>LibraryCMS</span>
+        </div>
     <mat-card>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
@@ -11,10 +15,10 @@
         </mat-form-field>
 
         <mat-error *ngIf="error" class="error-validation">
-          Podałeś błędne hasło lub login.. :(
+          Podałeś błędne hasło lub login
         </mat-error>
-        
-        <button class="submit" mat-flat-button color="primary" [disabled]="isFormInvalid">Zaloguj się</button>
+
+        <button class="submit" mat-button color="primary" [disabled]="isFormInvalid">Zaloguj się</button>
       </form>
     </mat-card>
   </div>

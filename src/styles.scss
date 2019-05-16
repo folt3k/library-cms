@@ -9,6 +9,11 @@ body {
     padding: 0;
 }
 
+button {
+    font-weight: 600 !important;
+    font-size: .84rem !important;
+}
+
 mat-form-field {
     width: 100% !important;
 }
@@ -25,4 +30,9 @@ table {
 
 .mat-column-controls {
     text-align: right;
+}
+
+
+.mat-paginator-page-size-label {
+    width: -webkit-fill-available;
 }

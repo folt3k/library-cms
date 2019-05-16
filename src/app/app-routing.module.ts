@@ -6,6 +6,10 @@ const routes: Routes = [
     path: 'ksiazki',
     loadChildren: './books/books.module#BooksModule',
   },
+  {
+    path: 'login',
+    loadChildren: './login/login.module#LoginModule'
+  }
 ];
 
 @NgModule({

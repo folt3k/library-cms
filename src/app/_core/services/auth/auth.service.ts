@@ -3,6 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { startWith } from "rxjs/operators";
 import { Router } from '@angular/router';
+import { User } from '../../models/user';
 
 export interface AuthCredentials {
   username: string;
@@ -15,6 +16,7 @@ export interface AuthCredentials {
 export class AuthService {
 
   private isAuthorizedSubject = new Subject();
+  private _currentUser: User;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -30,10 +32,11 @@ export class AuthService {
     return localStorage.getItem('token') || null;
   }
 
-  getUserInfo(): any {
+  getUserInfo() {
     return this.http.get('/users/me/')
       .subscribe(
-        () => {
+        (user: User) => {
+          this._currentUser = user;
           this.isAuthorizedSubject.next(true);
           this.router.navigate(['/ksiazki']);
         },
@@ -41,7 +44,11 @@ export class AuthService {
       )
   }
 
+  get currentUser() {
+    return this._currentUser;
+  }
+
   isAuthorized(): Observable<any> {
-    return this.isAuthorizedSubject.asObservable().pipe(startWith(false));
+    return this.isAuthorizedSubject.asObservable();
   }
 }

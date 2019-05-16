@@ -9,12 +9,20 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'library-cms';
-  isLoginPage = true;
+  isAuthorized = false;
+  loading = true;
 
   constructor(private authService: AuthService) {
     this.authService.getUserInfo();
     this.authService.isAuthorized()
-      .pipe(filter(authorized => !!authorized))
-      .subscribe(() => this.isLoginPage = false);
+      .pipe()
+      .subscribe((authorized) => {
+        if(authorized) {
+          this.isAuthorized = true;
+        } else {
+          this.isAuthorized = false;
+        }
+        this.loading = false;
+      });
   }
 }

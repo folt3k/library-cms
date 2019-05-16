@@ -1,0 +1,29 @@
+<div>
+</div>
+
+<form [formGroup]="filtersForm" (ngSubmit)="onFiltersChange()">
+  <div class="filters">
+      <app-search [parentFormGroup]="filtersForm" name="search" (onSearch)="onFiltersChange()"></app-search>
+
+    <mat-form-field>
+      <mat-label>Kategorie książek</mat-label>
+      <mat-select formControlName="book_categories" multiple>
+        <mat-option *ngFor="let cat of bookCatOptions" [value]="cat.id">{{ cat.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Wydział biblioteki</mat-label>
+      <mat-select formControlName="library_branch" multiple>
+        <mat-option *ngFor="let branch of branchOptions" [value]="branch.id">{{ branch.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <div class="buttons">
+    <button mat-raised-button color="primary" [disabled]="!filtersForm.dirty" type="submit">Filtruj wyniki</button>
+    <button mat-button *ngIf="filtersForm.dirty" type="button" (click)="resetForm()">Resetuj</button>
+  </div>
+
+</form>

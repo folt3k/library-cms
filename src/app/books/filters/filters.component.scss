@@ -1,0 +1,17 @@
+.filters {
+    display: flex;
+    mat-form-field {
+        max-width: 300px;
+        margin-right: 20px;
+    }
+
+    app-search {
+        margin-right: 20px;
+    }
+}
+
+.buttons {
+    button {
+        margin-right: 4px;
+    }
+}

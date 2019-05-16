@@ -1,18 +1,8 @@
-<mat-sidenav-container *ngIf="!isLoginPage" class="example-container">
+<ng-progress color="#3f51b5"></ng-progress>
+
+<mat-sidenav-container *ngIf="isAuthorized && !loading" class="example-container">
   <mat-sidenav mode="side" opened>
-    <mat-list>
-      <mat-list-item>
-        <mat-icon>library_books</mat-icon>Książki
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon>account_balance
-        </mat-icon> Filie
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon>people
-        </mat-icon> Czytelnicy
-      </mat-list-item>
-    </mat-list>
+    <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>
@@ -20,4 +10,4 @@
 </mat-sidenav-container>
 
 
-<app-login *ngIf="isLoginPage"></app-login>
+<app-login *ngIf="!isAuthorized && !loading"></app-login>
