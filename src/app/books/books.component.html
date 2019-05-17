@@ -1,10 +1,10 @@
 <div class="wrapper">
-  <div class="filters">
-    <app-filters (filtersChange)="onFiltersChange($event)"></app-filters>
+  <div class="table-up-controls">
+    <button mat-raised-button (click)="openAddBookDialog()">Dodaj książkę</button>
   </div>
 
-  <div class="table-up-controls">
-    <button mat-button color="primary" (click)="openAddBookDialog()">Dodaj książkę</button>
+  <div class="filters">
+    <app-filters (filtersChange)="onFiltersChange($event)"></app-filters>
   </div>
 
   <div>
@@ -32,7 +32,12 @@
       <ng-container matColumnDef="controls">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element" class="controls">
-          <button mat-button color="primary" [disabled]="element.borrow_status === 'on_borrow'">
+          <button
+            mat-button
+            color="primary"
+            [disabled]="element.borrow_status === 'on_borrow'"
+            (click)="openBorrowBookDialog(element)"
+          >
             {{ element.borrow_status === "on_borrow" ? "Wypożyczona" : "Wypożycz" }}
           </button>
         </td>
@@ -44,7 +49,7 @@
 
     <mat-paginator
       [length]="pagination.total"
-      [pageSize]="pagination.total"
+      [pageSize]="20"
       [pageSizeOptions]="[20, 50, 100]"
       (page)="onPageChange($event)"
     >

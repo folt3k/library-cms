@@ -10,6 +10,7 @@ import { DictsService } from "src/app/_core/services/dicts/dicts.service";
 })
 export class FiltersComponent implements OnInit {
   filtersForm: FormGroup;
+  searchForm: FormGroup;
   bookCatOptions = this.dictsService.getDict("book_categories");
   branchOptions = this.dictsService.getDict("library_branches");
 
@@ -18,23 +19,34 @@ export class FiltersComponent implements OnInit {
   constructor(private fb: FormBuilder, private dictsService: DictsService) {}
 
   ngOnInit() {
-    this.initForm();
+    this.initForms();
   }
 
-  initForm() {
+  initForms() {
     this.filtersForm = this.fb.group({
-      search: [""],
       book_categories: [[]],
       library_branch: [[]]
     });
+
+    this.searchForm = this.fb.group({
+      search: [""]
+    });
+
+    this.filtersForm.valueChanges.subscribe(values => {
+      this.onFiltersChange(values);
+    });
   }
 
-  onFiltersChange() {
-    this.filtersChange.emit(this.filtersForm.value);
+  onFiltersChange(values: any) {
+    this.filtersChange.emit({ ...values, ...this.searchForm.value });
   }
 
-  resetForm() {
-    this.filtersForm.reset({ search: "", book_categories: [], library_branch: [] });
-    this.onFiltersChange();
+  onSearch() {
+    this.filtersChange.emit({ ...this.filtersForm.value, ...this.searchForm.value });
+  }
+
+  resetFilters() {
+    this.filtersForm.reset({ book_categories: [], library_branch: [] });
+    this.onFiltersChange({ ...this.filtersForm.value });
   }
 }

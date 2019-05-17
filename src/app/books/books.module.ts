@@ -7,10 +7,11 @@ import { BooksRoutingModule } from "./books-routing.module";
 import { FiltersComponent } from "./filters/filters.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AddBookDialogComponent } from "./modals/add-book-dialog/add-book-dialog.component";
+import { BorrowBookDialogComponent } from "./modals/borrow-book/borrow-book-dialog.component";
 
 @NgModule({
-  declarations: [BooksComponent, FiltersComponent, AddBookDialogComponent],
+  declarations: [BooksComponent, FiltersComponent, AddBookDialogComponent, BorrowBookDialogComponent],
   imports: [CommonModule, ReactiveFormsModule, CoreModule, BooksRoutingModule],
-  entryComponents: [AddBookDialogComponent]
+  entryComponents: [AddBookDialogComponent, BorrowBookDialogComponent]
 })
 export class BooksModule {}

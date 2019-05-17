@@ -1,0 +1,20 @@
+<header class="header mat-elevation-z1">
+  <div class="left"></div>
+  <div class="right">
+    <div class="user" [matMenuTriggerFor]="menu">
+      <img
+        class="avatar"
+        src="http://angular-material.fusetheme.com/assets/images/avatars/Velazquez.jpg"
+        alt="avatar"
+      />
+      <span class="username">{{ username }}</span>
+      <mat-icon>expand_more</mat-icon>
+    </div>
+  </div>
+</header>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Profil</button>
+  <button mat-menu-item>Ustawienia konta</button>
+  <button mat-menu-item (click)="logout()">Wyloguj się</button>
+</mat-menu>

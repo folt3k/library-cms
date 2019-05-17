@@ -12,7 +12,9 @@ import {
   MatProgressSpinnerModule,
   MatPaginatorModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatMenuModule,
+  MatSnackBarModule
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -21,8 +23,9 @@ import { UrlInterceptor } from "./interceptors/url.interceptor";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { SearchComponent } from "./components/forms/search/search.component";
+import { HeaderComponent } from "./components/header/header.component";
 
-const COMPONENTS = [SidebarComponent, SearchComponent];
+const COMPONENTS = [SidebarComponent, SearchComponent, HeaderComponent];
 
 const MATERIALS = [
   MatSidenavModule,
@@ -37,6 +40,8 @@ const MATERIALS = [
   MatPaginatorModule,
   MatSelectModule,
   MatDialogModule,
+  MatMenuModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

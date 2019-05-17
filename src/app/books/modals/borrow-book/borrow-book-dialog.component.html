@@ -1,0 +1,18 @@
+<h3 mat-dialog-title>Nowe wypożyczenie</h3>
+
+<div>
+  <p class="confirm">
+    Potwierdź swoje wypożyczenie książki <strong>{{ data.book.title }} </strong>.
+  </p>
+
+  <p>
+    Egzeplarz książki będzie do odbioru w <strong>{{ data.book.library_branch }}</strong> w ciągu 7 dni roboczych.
+  </p>
+  <p>Po upływie tego czasu twoja rezerwacja zostanie anulowana.</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="confirmBorrow()">
+    Wypożycz książkę
+  </button>
+</div>

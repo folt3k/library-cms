@@ -1,9 +1,11 @@
 <div class="wrapper" [formGroup]="parentFormGroup">
   <mat-form-field>
     <input matInput [placeholder]="placeholder" [formControlName]="name" />
-    <button mat-button *ngIf="isValue" matSuffix mat-icon-button (click)="clearValue()">
+    <button mat-button *ngIf="isValue" matSuffix mat-icon-button (click)="clearValue()" type="button">
       <mat-icon>close</mat-icon>
     </button>
-    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="!isValue">
+    Szukaj
+  </button>
 </div>

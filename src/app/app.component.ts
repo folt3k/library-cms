@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
+
 import { AuthService } from "./_core/services/auth/auth.service";
-import { filter } from "rxjs/operators";
 import { DictsService } from "./_core/services/dicts/dicts.service";
 
 @Component({
@@ -15,18 +15,22 @@ export class AppComponent {
   loadingDicts = true;
 
   constructor(private authService: AuthService, private dictsService: DictsService) {
-    this.dictsService.queryDicts().then(() => (this.loadingDicts = false));
     this.authService.getUserInfo();
     this.authService
       .isAuthorized()
       .pipe()
       .subscribe(authorized => {
         if (authorized) {
-          this.isAuthorized = true;
+          this.dictsService.queryDicts().then(() => {
+            this.isAuthorized = true;
+            this.loadingDicts = false;
+            this.loadingUser = false;
+          });
         } else {
           this.isAuthorized = false;
+          this.loadingDicts = false;
+          this.loadingUser = false;
         }
-        this.loadingUser = false;
       });
   }
 

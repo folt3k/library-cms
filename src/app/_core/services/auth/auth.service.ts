@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, Subject, Subscription } from "rxjs";
 import { Router } from "@angular/router";
+import { Observable, Subject, Subscription } from "rxjs";
 
 import { User } from "../../models/user";
 
@@ -38,7 +38,10 @@ export class AuthService {
         this.isAuthorizedSubject.next(true);
         this.router.navigate(["/ksiazki"]);
       },
-      () => this.isAuthorizedSubject.next(false)
+      () => {
+        this.isAuthorizedSubject.next(false);
+        this.router.navigate(["/"]);
+      }
     );
   }
 
@@ -48,5 +51,12 @@ export class AuthService {
 
   isAuthorized(): Observable<any> {
     return this.isAuthorizedSubject.asObservable();
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+    this._currentUser = null;
+    this.isAuthorizedSubject.next(false);
+    this.router.navigate(["/"]);
   }
 }

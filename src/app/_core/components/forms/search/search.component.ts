@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 @Component({
@@ -10,6 +10,7 @@ export class SearchComponent implements OnInit {
   @Input() parentFormGroup: FormGroup;
   @Input() name: string;
   @Input() placeholder?: string;
+  @Output() onSearch = new EventEmitter();
 
   constructor() {}
 
@@ -21,5 +22,6 @@ export class SearchComponent implements OnInit {
 
   clearValue() {
     this.parentFormGroup.patchValue({ [this.name]: "" });
+    this.onSearch.emit();
   }
 }

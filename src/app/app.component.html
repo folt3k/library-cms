@@ -1,10 +1,11 @@
-<ng-progress color="#3f51b5"></ng-progress>
+<ng-progress color="#3f51b5" [spinner]="false"></ng-progress>
 
 <mat-sidenav-container *ngIf="isAuthorized && !loading" class="example-container">
   <mat-sidenav mode="side" opened>
     <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>
+    <app-header></app-header>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

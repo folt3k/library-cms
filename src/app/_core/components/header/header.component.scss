@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: white;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e8e7e7;
+  }
+
+  mat-icon {
+    font-size: 17px;
+    height: 17px;
+    width: 17px;
+  }
+}
+
+.avatar {
+  width: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.username {
+  padding-right: 6px;
+}
