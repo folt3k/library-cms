@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 
 import { BorrowBookService } from "../../../_core/services/borrow-book/borrow-book.service";
 import { AuthService } from "../../../_core/services/auth/auth.service";
+import { Book } from 'src/app/_core/models/book';
 
 @Component({
   selector: "app-borrow-dialog-book",
@@ -12,7 +13,7 @@ import { AuthService } from "../../../_core/services/auth/auth.service";
 export class BorrowBookDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<BorrowBookDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { book: Book },
     private borrowBookService: BorrowBookService,
     private authService: AuthService
   ) {}
@@ -20,12 +21,7 @@ export class BorrowBookDialogComponent implements OnInit {
   ngOnInit() {}
 
   confirmBorrow() {
-    const borrow = {
-      book: this.data.book.id,
-      borrower: this.authService.currentUser.id
-    };
-
-    this.borrowBookService.borrowBook(borrow).subscribe(() => {
+    this.borrowBookService.borrowBook(this.data.book).subscribe(() => {
       this.dialogRef.close(true);
     });
   }

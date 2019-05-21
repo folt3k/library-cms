@@ -10,7 +10,8 @@ export class AlertService {
   open(message: string, delay = 500) {
     setTimeout(() => {
       this.snackBar.open(message, "", {
-        duration: 8000
+        duration: 8000,
+        verticalPosition: 'top',
       });
     }, delay);
   }

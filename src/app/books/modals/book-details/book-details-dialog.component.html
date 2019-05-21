@@ -1,0 +1,48 @@
+<h3 mat-dialog-title>#{{ data.book.id }} - {{ data.book.title }}</h3>
+
+<div class="wrapper">
+  <ul class="list">
+    <li>
+      <strong>Autor: </strong>
+      <span>{{ data.book.author.name }}</span>
+    </li>
+    <li>
+      <strong>Liczba stron: </strong>
+      <span>{{ data.book.pages_count }}</span>
+    </li>
+    <li>
+      <strong>Rok wydania: </strong>
+      <span>{{ data.book.publish_year }}</span>
+    </li>
+    <li>
+      <strong>Kategorie: </strong>
+      <span>{{ categories }}</span>
+    </li>
+  </ul>
+
+  <div class="branch">
+    <span class="branches-title">Położenie książki:</span>
+
+    <ul class="list list-split">
+      <li>
+        <span>{{ data.book.library_branch.name }}</span>
+      </li>
+      <li>
+        <span>{{ data.book.library_branch.address }}</span>
+      </li>
+      <li>
+        <span>{{ data.book.library_branch.phone_number }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="onBorrow()" *ngIf="!data.book.borrow_status.is_borrowed">
+    Wypożycz książkę
+  </button>
+
+  <button mat-flat-button color="primary" [disabled]="true" *ngIf="data.book.borrow_status.is_borrowed">
+    Książka jest wypożyczona do {{ data.book.borrow_status.return_date | date: "dd/MM/yyyy" }}
+  </button>
+</div>

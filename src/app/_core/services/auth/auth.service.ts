@@ -10,17 +10,22 @@ export interface AuthCredentials {
   password: string;
 }
 
+interface AuthResponse {
+  access: string;
+  refresh: string;
+}
+
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  private isAuthorizedSubject = new Subject();
+  private isAuthorizedSubject = new Subject<boolean>();
   private _currentUser: User;
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(credentials: AuthCredentials): Observable<any> {
-    return this.http.post("/token/", credentials);
+  login(credentials: AuthCredentials): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>("/token/", credentials);
   }
 
   storeToken(token: string) {
@@ -49,7 +54,7 @@ export class AuthService {
     return this._currentUser;
   }
 
-  isAuthorized(): Observable<any> {
+  isAuthorized(): Observable<boolean> {
     return this.isAuthorizedSubject.asObservable();
   }
 

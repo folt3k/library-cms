@@ -19,7 +19,7 @@
       </ng-container>
       <ng-container matColumnDef="author">
         <th mat-header-cell *matHeaderCellDef>Autor</th>
-        <td mat-cell *matCellDef="let element">{{ element.author }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.author.name }}</td>
       </ng-container>
       <ng-container matColumnDef="publish_year">
         <th mat-header-cell *matHeaderCellDef>Rok wydania</th>
@@ -27,7 +27,7 @@
       </ng-container>
       <ng-container matColumnDef="library_branch">
         <th mat-header-cell *matHeaderCellDef>Położenie książki</th>
-        <td mat-cell *matCellDef="let element">{{ element.library_branch }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.library_branch.name }}</td>
       </ng-container>
       <ng-container matColumnDef="controls">
         <th mat-header-cell *matHeaderCellDef></th>
@@ -35,16 +35,24 @@
           <button
             mat-button
             color="primary"
-            [disabled]="element.borrow_status === 'on_borrow'"
-            (click)="openBorrowBookDialog(element)"
+            *ngIf="!element.borrow_status.is_borrowed"
+            (click)="openBorrowBookDialog(element, $event)"
           >
-            {{ element.borrow_status === "on_borrow" ? "Wypożyczona" : "Wypożycz" }}
+            Wypożycz książkę
           </button>
+          <span *ngIf="element.borrow_status.is_borrowed" class="borrowed">
+            Wypożyczona (do {{ element.borrow_status.return_date | date: "dd/MM/yyyy" }})
+          </span>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        class="mat-row-clickable"
+        (click)="openBookDetailsDialog(row)"
+      ></tr>
     </table>
 
     <mat-paginator

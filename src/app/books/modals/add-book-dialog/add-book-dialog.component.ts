@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DictsService } from "src/app/_core/services/dicts/dicts.service";
 import { BooksService } from "src/app/_core/services/books/books.service";
+import { MatDialogRef } from "@angular/material";
 
 @Component({
   selector: "app-add-book-dialog",
@@ -16,7 +17,12 @@ export class AddBookDialogComponent implements OnInit {
     authors: this.dictsService.getDict("authors")
   };
 
-  constructor(private fb: FormBuilder, private dictsService: DictsService, private booksService: BooksService) {}
+  constructor(
+    private fb: FormBuilder,
+    private dictsService: DictsService,
+    private booksService: BooksService,
+    public dialogRef: MatDialogRef<AddBookDialogComponent>
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -34,6 +40,8 @@ export class AddBookDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.booksService.addBook(this.form.value).subscribe();
+    this.booksService.addBook(this.form.value).subscribe(() => {
+      this.dialogRef.close(true);
+    });
   }
 }

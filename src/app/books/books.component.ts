@@ -6,6 +6,8 @@ import { BooksService } from "../_core/services/books/books.service";
 import { AddBookDialogComponent } from "./modals/add-book-dialog/add-book-dialog.component";
 import { BorrowBookDialogComponent } from "./modals/borrow-book/borrow-book-dialog.component";
 import { AlertService } from "../_core/services/alert/alert.service";
+import { Book } from "../_core/models/book";
+import { BookDetailsDialogComponent } from "./modals/book-details/book-details-dialog.component";
 
 @Component({
   selector: "app-books",
@@ -13,7 +15,7 @@ import { AlertService } from "../_core/services/alert/alert.service";
   styleUrls: ["./books.component.scss"]
 })
 export class BooksComponent implements OnInit {
-  books = [];
+  books: Book[] = [];
   pagination = {};
   displayedColumns = ["id", "title", "author", "publish_year", "library_branch", "controls"];
   filterParams = {};
@@ -30,7 +32,7 @@ export class BooksComponent implements OnInit {
     this.pagination = books.pagination;
   }
 
-  onPageChange({ pageIndex, pageSize }) {
+  onPageChange({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) {
     const params = {
       page: pageIndex + 1,
       page_size: pageSize
@@ -40,11 +42,11 @@ export class BooksComponent implements OnInit {
     this.loadBooks();
   }
 
-  updateFilters(values) {
+  updateFilters(values: any) {
     this.filterParams = { ...this.filterParams, ...values };
   }
 
-  onFiltersChange(data) {
+  onFiltersChange(data: any) {
     const params = {
       ...data
     };
@@ -54,12 +56,24 @@ export class BooksComponent implements OnInit {
   }
 
   openAddBookDialog() {
-    this.modal.open(AddBookDialogComponent, {
+    const ref = this.modal.open(AddBookDialogComponent, {
       width: "800px"
     });
+
+    ref
+      .afterClosed()
+      .pipe(filter(result => !!result))
+      .subscribe(() => {
+        this.alertService.open("Książka została pomyślnie dodana");
+        this.loadBooks();
+      });
   }
 
-  openBorrowBookDialog(book) {
+  openBorrowBookDialog(book: Book, event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+
     const ref = this.modal.open(BorrowBookDialogComponent, {
       data: { book }
     });
@@ -68,8 +82,21 @@ export class BooksComponent implements OnInit {
       .afterClosed()
       .pipe(filter(result => !!result))
       .subscribe(() => {
-        this.alertService.open('Książka została pomyślnie wypożyczona.');
+        this.alertService.open("Książka została pomyślnie wypożyczona.");
         this.loadBooks();
+      });
+  }
+
+  openBookDetailsDialog(book: Book) {
+    const ref = this.modal.open(BookDetailsDialogComponent, {
+      data: { book }
+    });
+
+    ref
+      .afterClosed()
+      .pipe(filter(result => !!result))
+      .subscribe(() => {
+        this.openBorrowBookDialog(book);
       });
   }
 }

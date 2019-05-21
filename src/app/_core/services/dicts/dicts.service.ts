@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
-import { of, Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+
+import { QueryResponse } from "../../models/api";
+import { BookAuthor } from "../../models/book";
 
 @Injectable({
   providedIn: "root"
@@ -11,18 +13,14 @@ export class DictsService {
   constructor(private http: HttpClient) {}
 
   queryDicts(): Promise<any> {
-    const library_branches = this.http.get("/libraries").toPromise();
-    const book_categories = this.http.get("/categories").toPromise();
+    const dicts = this.http.get("/dictionaries").toPromise();
+    const authors = this.http.get<QueryResponse<BookAuthor>>("/authors").toPromise();
 
-    return Promise.all([library_branches, book_categories]).then((dicts: any) => {
-      this.dicts.library_branches = dicts[0].results.map((b, i) => ({ id: i + 1, ...b }));
-      this.dicts.book_categories = dicts[1].results;
-      this.dicts.authors = [
-        {
-          id: 1,
-          name: "Szymborska"
-        }
-      ]
+    return Promise.all([dicts, authors]).then(data => {
+      this.dicts = {
+        ...data[0],
+        authors: data[1].results
+      };
     });
   }
 
