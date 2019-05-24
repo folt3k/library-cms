@@ -1,0 +1,23 @@
+<h3 mat-dialog-title>Nowa filia</h3>
+
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput [placeholder]="'Nazwa filli'" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [placeholder]="'Adres'" formControlName="address" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [placeholder]="'Numer telefonu'" formControlName="phone_number" type="number" />
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid">
+        Zapisz filie
+      </button>
+    </div>
+  </form>
+</div>

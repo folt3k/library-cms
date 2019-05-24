@@ -18,6 +18,7 @@ import {
 } from "@angular/material";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
 
 import { UrlInterceptor } from "./interceptors/url.interceptor";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
@@ -41,12 +42,12 @@ const MATERIALS = [
   MatSelectModule,
   MatDialogModule,
   MatMenuModule,
-  MatSnackBarModule,
+  MatSnackBarModule
 ];
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule, FormsModule, ...MATERIALS],
+  imports: [CommonModule, HttpClientModule, ReactiveFormsModule, FormsModule, RouterModule, ...MATERIALS],
   exports: [...MATERIALS, ...COMPONENTS],
   providers: [
     {

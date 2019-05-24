@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
 const routes: Routes = [
   {
-    path: 'ksiazki',
-    loadChildren: './books/books.module#BooksModule',
+    path: "ksiazki",
+    loadChildren: "./books/books.module#BooksModule"
   },
   {
-    path: 'login',
-    loadChildren: './login/login.module#LoginModule'
+    path: "filie",
+    loadChildren: "./library-branches/library-branches.module#LibraryBranchesModule"
+  },
+  {
+    path: "login",
+    loadChildren: "./login/login.module#LoginModule"
   }
 ];
 
@@ -16,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
